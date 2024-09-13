@@ -46,9 +46,8 @@ if not (IMAP_SERVER and IMAP_USER and IMAP_PASSWORD and TELEGRAM_TOKEN and TELEG
         "❌ One or more configuration values are missing. Please check config.txt.")
     exit(1)
 
-# Максимальный размер сообщения в Telegram (приблизительно)
-MAX_TELEGRAM_MSG_SIZE = 4000
-CHECK_INTERVAL = 60  # Проверка писем каждые 30 секунд
+MAX_TELEGRAM_MSG_SIZE = 4000 # Максимальный размер сообщения в Telegram (приблизительно)
+CHECK_INTERVAL = 60  # Проверка писем каждые N секунд
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO, filename='mail_to_telegram.log', filemode='a',
