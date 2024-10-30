@@ -31,7 +31,7 @@ async def main():
    
    - `IMAP_SERVER=imap.example.com` - IMAP сервер почты (в случае Яндекс: `imap.yandex.ru`)
    - `IMAP_USER=user@example.com` - аккаунт, с которого будем пересылать почту
-   - `IMAP_PASSWORD=1234567890` - пароль аккаунта (в случае Яндекса используем пароль, созданный через [Пароли приложений.](https://yandex.ru/support/id/ru/authorization/app-passwords)
+   - `IMAP_PASSWORD=1234567890` - пароль аккаунта. В случае Яндекса используем пароль, созданный через [Пароли приложений.](https://yandex.ru/support/id/ru/authorization/app-passwords)
    - `TELEGRAM_TOKEN=1234567890` - токен от вашего бота в Telegram ([как получить](https://helpdesk.bitrix24.ru/open/17538378/))
    - `TELEGRAM_CHANNEL_ID=1234567890` - ID канала, чата или группы, в которую будем пересылать письма ([как узнать](https://t.me/getmyid_bot))
 
