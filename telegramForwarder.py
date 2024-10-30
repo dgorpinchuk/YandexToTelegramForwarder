@@ -235,7 +235,7 @@ async def check_mail():
                                     "\n\n✨ Сокращено..."
                             await bot.send_message(
                                 chat_id=TELEGRAM_CHANNEL_ID,
-                                text=f"✉ Новое письмо olimp@iproficlub.ru\n👤 От: {from_}\n📣 Тема: {subject}\n\n🔸🔸🔸\n\n{body}"
+                                text=f"✉ Новое письмо\n👤 От: {from_}\n📣 Тема: {subject}\n\n🔸🔸🔸\n\n{body}"
                             )
 
                         # Отправка вложений и инлайн-изображений
