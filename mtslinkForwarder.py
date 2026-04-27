@@ -5,6 +5,7 @@ import email
 from email.header import decode_header
 from email import policy
 import html2text
+import html
 import logging
 import time
 import asyncio
@@ -153,12 +154,14 @@ async def check_mail():
                                 subject = subject_tuple[0].decode(
                                     subject_tuple[1] or 'utf-8'
                                 ) if isinstance(subject_tuple[0], bytes) else subject_tuple[0]
+                                subject = html.unescape(subject)
                             except:
                                 subject = str(subject_tuple[0])
                         else:
                             subject = "Без темы"
 
                         from_ = msg.get('From')
+                        from_ = html.unescape(from_)
                         body = ""
 
                         if msg.is_multipart():
@@ -180,6 +183,7 @@ async def check_mail():
 
                                     body = clean_text(body)
                                     body = remove_quotes(body)
+                                    body = html.unescape(body)
                                     break
                         else:
                             body = msg.get_payload(decode=True).decode(
@@ -195,6 +199,7 @@ async def check_mail():
 
                             body = clean_text(body)
                             body = remove_quotes(body)
+                            body = html.unescape(body)
 
                         if not body:
                             continue
