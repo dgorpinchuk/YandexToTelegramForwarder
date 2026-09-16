@@ -1,6 +1,7 @@
 import re
 import os
 import imaplib
+import socket
 import email
 from email.header import decode_header
 from email import policy
@@ -39,6 +40,20 @@ if not (IMAP_SERVER and IMAP_USER and IMAP_PASSWORD and MTS_WEBHOOK_URL):
 
 CHECK_INTERVAL = 60
 MAX_MSG_SIZE = 4000
+
+
+class IPv4IMAP4SSL(imaplib.IMAP4_SSL):
+    """IMAP4 over SSL using IPv4 while preserving TLS hostname verification."""
+
+    def _create_socket(self, timeout):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        if timeout is not None:
+            sock.settimeout(timeout)
+
+        ipv4_address = socket.gethostbyname(self.host)
+        sock.connect((ipv4_address, self.port))
+        return self.ssl_context.wrap_socket(sock, server_hostname=self.host)
+
 
 # ================= LOGGING =================
 
@@ -271,7 +286,7 @@ def get_message_body(msg):
 async def check_mail():
     mail = None
     try:
-        mail = imaplib.IMAP4_SSL(IMAP_SERVER)
+        mail = IPv4IMAP4SSL(IMAP_SERVER)
         mail.login(IMAP_USER, IMAP_PASSWORD)
         mail.select('inbox')
 
